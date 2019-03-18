@@ -3,14 +3,14 @@ import or78_helpers
 
 
 def final_turn(this_vars):
-    this_vars.F9 = (this_vars.GOAL_IN_MILES-this_vars.total_mileage_previous_turn) / \
+    this_vars.fraction_of_2_weeks = (this_vars.GOAL_IN_MILES-this_vars.total_mileage_previous_turn) / \
         (this_vars.total_mileage-this_vars.total_mileage_previous_turn)
     this_vars.amount_spent_on_food = this_vars.amount_spent_on_food + \
-        (1-this_vars.F9)*(8*5*this_vars.choice_of_eating)
+        (1-this_vars.fraction_of_2_weeks)*(8*5*this_vars.choice_of_eating)
     print("YOU FINALLY ARRIVED AT OREGON CITY")
     print("AFTER g_vars.GOAL_IN_MILES LONG MILES---HOORAY !!!!!")
     print("A REAL PIONEER!")
-    F9 = int(this_vars.F9*14)
+    F9 = int(this_vars.fraction_of_2_weeks*14)
     days = this_vars.current_date*14+F9
     # base_week = or78_2_date.print_date(this_vars.current_date)
     last_date = or78_2_date.print_final_date(days)
