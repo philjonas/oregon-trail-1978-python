@@ -3,14 +3,16 @@ import or78_helpers
 
 
 def final_turn(this_vars):
-    this_vars.F9 = (2040-this_vars.M2)/(this_vars.M-this_vars.M2)
-    this_vars.F = this_vars.F+(1-this_vars.F9)*(8*5*this_vars.E)
+    this_vars.F9 = (this_vars.GOAL_IN_MILES-this_vars.total_mileage_previous_turn) / \
+        (this_vars.total_mileage-this_vars.total_mileage_previous_turn)
+    this_vars.amount_spent_on_food = this_vars.amount_spent_on_food + \
+        (1-this_vars.F9)*(8*5*this_vars.choice_of_eating)
     print("YOU FINALLY ARRIVED AT OREGON CITY")
-    print("AFTER 2040 LONG MILES---HOORAY !!!!!")
+    print("AFTER g_vars.GOAL_IN_MILES LONG MILES---HOORAY !!!!!")
     print("A REAL PIONEER!")
     F9 = int(this_vars.F9*14)
-    days = this_vars.D3*14+F9
-    # base_week = or78_2_date.print_date(this_vars.D3)
+    days = this_vars.current_date*14+F9
+    # base_week = or78_2_date.print_date(this_vars.current_date)
     last_date = or78_2_date.print_final_date(days)
     print(last_date)
     this_vars.print_inventory()
@@ -21,16 +23,16 @@ def final_turn(this_vars):
 
 
 def death(this_vars):
-    if this_vars.F < 12:
+    if this_vars.amount_spent_on_food < 12:
         print("YOU RAN OUT OF FOOD AND STARVED TO DEATH")
-    elif this_vars.C1:
+    elif this_vars.is_sufficient_clothing:
         print("YOU DIED OF PNEUMONIA")
-    elif this_vars.T < 0:
+    elif this_vars.cash_total < 0:
         print("YOU CAN'T AFFORD A DOCTOR")
         print("YOU DIED OF PNEUMONIA")
-    elif this_vars.M1 < 0:
+    elif this_vars.amount_spent_on_miscellaneous < 0:
         print("YOU RAN OUT OF MEDICAL SUPPLIES")
-    elif this_vars.K8:
+    elif this_vars.is_injured:
         print("YOU DIED OF INJURIES")
     print("DUE TO YOUR UNFORTUNATE SITUATION, THERE ARE A FEW FORMALITIES WE MUST GO THROUGH")
     minister = or78_helpers.input_yes_no("WOULD YOU LIKE A MINISTER?")
@@ -46,9 +48,3 @@ def death(this_vars):
     print("BETTER LUCK NEXT TIME")
     print("SINCERELY")
     print("THE OREGON CITY CHAMBER OF COMMERCE")
-
-
-if __name__ == '__main__':
-    pass
-    # final_turn()
-    # death()

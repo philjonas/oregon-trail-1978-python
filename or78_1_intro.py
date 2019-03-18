@@ -1,9 +1,10 @@
 import or78_helpers
 
+
 def need_intro():
     message = '''THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM
     INDEPENDENCE, MISSOURI TO OREGON CITY, OREGON IN 1847.
-    YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGON TRAIL
+    YOUR FAMILY OF FIVE WILL COVER THE g_vars.GOAL_IN_MILES MILE OREGON TRAIL
     IN 5-6 MONTHS --- IF YOU MAKE IT ALIVE.
 
     YOU HAD SAVED $900 TO SPEND FOR THE TRIP, AND YOU'VE JUST
@@ -49,6 +50,7 @@ def need_intro():
     if reply:
         print(message)
 
+
 def marksman_level():
     message = '''HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE?
         (1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'
@@ -58,8 +60,9 @@ def marksman_level():
     amount = or78_helpers.input_int(message)
     return min(amount, 5)
 
+
 def oxen():
-    message= "HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM ?"
+    message = "HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM ?"
     amount = 0
     while amount < 200 or amount > 300:
         amount = or78_helpers.input_int(message)
@@ -69,8 +72,9 @@ def oxen():
             print("TOO MUCH")
     return amount
 
+
 def general_expenses(var):
-    message= "HOW MUCH DO YOU WANT TO SPEND ON {}? ".format(var)
+    message = "HOW MUCH DO YOU WANT TO SPEND ON {}? ".format(var)
     amount = -1
     while amount < 0:
         amount = or78_helpers.input_int(message)
@@ -78,26 +82,24 @@ def general_expenses(var):
             print("IMPOSSIBLE")
     return amount
 
+
 def init(this_vars):
     # ***INSTRUCTIONS***
     need_intro()
-    this_vars.D9 = marksman_level()
+    this_vars.shooting_level = marksman_level()
     # *** INITIAL PURCHASES***
-    while this_vars.T < 0:
-        this_vars.A = oxen()
-        this_vars.F = general_expenses("FOOD")
-        this_vars.B = general_expenses("AMMUNITION")
-        this_vars.C = general_expenses("CLOTHING")
-        this_vars.M1 = general_expenses("MISCELLANEOUS SUPPLIES")
-        this_vars.T = 700 - this_vars.A - this_vars.F - \
-            this_vars.B - this_vars.C - this_vars.M1
-        if this_vars.T < 0:
+    while this_vars.cash_total < 0:
+        this_vars.amount_spent_on_animals = oxen()
+        this_vars.amount_spent_on_food = general_expenses("FOOD")
+        this_vars.amount_spent_on_bullets = general_expenses("AMMUNITION")
+        this_vars.amount_spent_on_clothing = general_expenses("CLOTHING")
+        this_vars.amount_spent_on_miscellaneous = general_expenses(
+            "MISCELLANEOUS SUPPLIES")
+        this_vars.cash_total = 700 - this_vars.amount_spent_on_animals - this_vars.amount_spent_on_food - \
+            this_vars.amount_spent_on_bullets - this_vars.amount_spent_on_clothing - \
+            this_vars.amount_spent_on_miscellaneous
+        if this_vars.cash_total < 0:
             print("YOU OVERSPENT--YOU ONLY HAD $700 TO SPEND.  BUY AGAIN.")
 
-    print("AFTER ALL YOUR PURCHASES, YOU NOW HAVE {} DOLLARS LEFT".format(this_vars.T))
-
-if __name__ == '__main__':
-    # need_intro()
-    # marksman_level()
-    #oxen()
-    general_expenses('food')
+    print("AFTER ALL YOUR PURCHASES, YOU NOW HAVE {} DOLLARS LEFT".format(
+        this_vars.cash_total))

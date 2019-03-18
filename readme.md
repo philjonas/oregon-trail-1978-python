@@ -2,6 +2,11 @@
 
 A few changes were made here and there and though I originally did not intend to use classes at all, I ended up using one to store all the global variables in one place.
 
+## To run the game:
+```
+python or78.py
+```
+
 ## BASIC source code from:
 https://github.com/fortran-gaming/oregon-trail-1975-basic
 

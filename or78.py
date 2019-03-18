@@ -1,4 +1,13 @@
- '''
+from or78_vars import GameGlobals
+import or78_1_intro
+import or78_2_date
+import or78_3_loop
+import or78_4_riders
+import or78_5_events
+import or78_6_mountain
+import or78_7_endings
+
+'''
  The program that follows is a reconstruction
  of the Oregon Trail game written for HP time-shared
  BASIC by Don Rawitsch and Bill Heinemann and Paul Dillenberger
@@ -17,58 +26,55 @@
     ST. PAUL, MN  55113
 '''
 
-from or78_vars import GameGlobals
-import or78_1_intro
-import or78_2_date
-import or78_3_loop
-import or78_4_riders
-import or78_5_events
-import or78_6_mountain
-import or78_7_endings
-g_vars = GameGlobals()
 
-or78_1_intro.init(g_vars)
+def game():
+    g_vars = GameGlobals()
 
-while g_vars.M < 2040:
-    or78_2_date.print_date(g_vars.D3)
+    or78_1_intro.init(g_vars)
 
-    or78_3_loop.begin(g_vars)
-    if g_vars.DEAD:
-        or78_7_endings.death(g_vars)
-        break
+    while g_vars.total_mileage < g_vars.GOAL_IN_MILES:
+        or78_2_date.print_date(g_vars.current_date)
 
-    or78_3_loop.choices(g_vars)
-    if g_vars.DEAD:
-        or78_7_endings.death(g_vars)
-        break
-    else:
-        or78_3_loop.toggle_fort_presence(g_vars)
+        or78_3_loop.begin(g_vars)
+        if g_vars.dead:
+            or78_7_endings.death(g_vars)
+            break
 
-    or78_3_loop.eating(g_vars)
+        or78_3_loop.choices(g_vars)
+        if g_vars.dead:
+            or78_7_endings.death(g_vars)
+            break
+        else:
+            or78_3_loop.toggle_fort_presence(g_vars)
 
-    or78_4_riders.riders(g_vars)
-    if g_vars.DEAD:
-        or78_7_endings.death(g_vars)
-        break
+        or78_3_loop.eating(g_vars)
 
-    or78_5_events.events(g_vars)
-    if g_vars.DEAD:
-        or78_7_endings.death(g_vars)
-        break
+        or78_4_riders.riders(g_vars)
+        if g_vars.dead:
+            or78_7_endings.death(g_vars)
+            break
 
-    or78_6_mountain.mountain(g_vars)
-    if g_vars.DEAD:
-        or78_7_endings.death(g_vars)
-        break
+        or78_5_events.events(g_vars)
+        if g_vars.dead:
+            or78_7_endings.death(g_vars)
+            break
 
-    g_vars.increment_turn()
+        or78_6_mountain.mountain(g_vars)
+        if g_vars.dead:
+            or78_7_endings.death(g_vars)
+            break
 
-    if g_vars.no_turns_left(or78_2_date.dates):
-        g_vars.print_too_long()
-        break
+        g_vars.increment_turn()
 
-if not g_vars.DEAD:
-    or78_7_endings.final_turn(g_vars)
+        if g_vars.no_turns_left(or78_2_date.dates):
+            g_vars.print_too_long()
+            break
 
-print('END')
+    if not g_vars.dead:
+        or78_7_endings.final_turn(g_vars)
 
+    print('END')
+
+
+if __name__ == "__main__":
+    game()

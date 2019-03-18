@@ -1,74 +1,72 @@
 class GameGlobals:
     def __init__(self):
-        self.DEAD = False
+        self.dead = False
+        self.GOAL_IN_MILES = 2040
+        self.SOUTH_PASS_IN_MILES = 950
+
         # ***IDENTIFICATION OF VARIABLES IN THE PROGRAM***
         # A = AMOUNT SPENT ON ANIMALS
-        self.A = 0
+        self.amount_spent_on_animals = 0
         # B = AMOUNT SPENT ON AMMUNITION
-        self.B = 0
+        self.amount_spent_on_bullets = 0
         # C = AMOUNT SPENT ON CLOTHING
-        self.C = 0
+        self.amount_spent_on_clothing = 0
         # C1 = FLAG FOR INSUFFICIENT CLOTHING IN COLD WEATHER
-        self.C1 = False
-        # C$ = YES/NO RESPONSE TO QUESTIONS
-        self.CS = None
-        # D1 = COUNTER IN GENERATING EVENTS
-        self.D1 = None
+        self.is_sufficient_clothing = False
         # D3 = TURN NUMBER FOR SETTING DATE
-        self.D3 = 0
+        self.current_date = 0
         # D9 = CHOICE OF SHOOTING EXPERTISE LEVEL
-        self.D9 = None
+        self.shooting_level = None
         # E = CHOICE OF EATING
-        self.E = None
+        self.choice_of_eating = None
         # F = AMOUNT SPENT ON FOOD
-        self.F = 0
+        self.amount_spent_on_food = 0
         # F1 = FLAG FOR CLEARING SOUTH PASS
-        self.F1 = False
+        self.has_cleared_south_pass = False
         # F2 = FLAG FOR CLEARING BLUE MOUNTAINS
-        self.F2 = False
+        self.has_cleared_blue_montains = False
         # K8 = FLAG FOR INJURY
-        self.K8 = False
+        self.is_injured = False
         # L1 = FLAG FOR BLIZZARD
-        self.L1 = False
+        self.is_blizzard = False
         # M =TOTAL MILEAGE WHOLE TRIP
-        self.M = 0
+        self.total_mileage = 0
         # M1 = AMOUNT SPENT ON MISCELLANEOUS SUPPLIES
-        self.M1 = 0
+        self.amount_spent_on_miscellaneous = 0
         # M2 = TOTAL MILEAGE UP THROUGH PREVIOUS TURN
-        self.M2 = 0
-        # R1 = RANDOM NUMBER IN CHOOSING EVENTS
-        self.R1 = None
+        self.total_mileage_previous_turn = 0
         # S4 = FLAG FOR ILLNESS
-        self.S4 = False
+        self.has_illness = False
         # S5 = ""HOSTILITY OF RIDERS"" FACTOR
-        self.S5 = False
+        self.hostility_of_riders = False
         # T = CASH LEFT OVER AFTER INITIAL PURCHASES
-        self.T = -1
-        # X = CHOICE OF ACTION FOR EACH TURN
-        self.X = None
+        self.cash_total = -1
         # X1 = FLAG FOR FORT OPTION
-        self.X1 = False
+        self.has_fort = False
 
     def print_inventory(self):
-        self.F = max(int(self.F), 0)
-        self.B = max(int(self.B), 0)
-        self.C = max(int(self.C), 0)
-        self.M1 = max(int(self.M1), 0)
+        self.amount_spent_on_food = max(int(self.amount_spent_on_food), 0)
+        self.amount_spent_on_bullets = max(
+            int(self.amount_spent_on_bullets), 0)
+        self.amount_spent_on_clothing = max(
+            int(self.amount_spent_on_clothing), 0)
+        self.amount_spent_on_miscellaneous = max(
+            int(self.amount_spent_on_miscellaneous), 0)
         print("=================================================")
-        print("FOOD: ", self.F)
-        print("BULLETS: ", self.B)
-        print("CLOTHING:", self.C)
-        print("MISC. SUPP.", self.M1)
-        print("CASH", self.T)
+        print("FOOD: ", self.amount_spent_on_food)
+        print("BULLETS: ", self.amount_spent_on_bullets)
+        print("CLOTHING:", self.amount_spent_on_clothing)
+        print("MISC. SUPPLIES: ", self.amount_spent_on_miscellaneous)
+        print("CASH : $", self.cash_total)
         print("=================================================")
 
     def increment_turn(self):
-        self.D3 += 1
+        self.current_date += 1
 
     def print_too_long(self):
         print("YOU HAVE BEEN ON THE TRAIL TOO LONG ------")
         print("YOUR FAMILY DIES IN THE FIRST BLIZZARD OF WINTER")
-        self.DEAD = True
+        self.dead = True
 
     def no_turns_left(self, arr):
-        return self.D3 >= len(arr)
+        return self.current_date >= len(arr)
