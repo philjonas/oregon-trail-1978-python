@@ -44,8 +44,3 @@ def illness(this_vars):
         print("YOU MUST STOP FOR MEDICAL ATTENTION")
         this_vars.amount_spent_on_miscellaneous -= 10
         this_vars.has_illness = True
-
-
-if __name__ == '__main__':
-    # print(shooting(5))
-    pass
