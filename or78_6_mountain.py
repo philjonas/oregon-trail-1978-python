@@ -8,8 +8,8 @@ def blizzard(this_vars):
     this_vars.amount_spent_on_food -= 25
     this_vars.amount_spent_on_miscellaneous -= 10
     this_vars.amount_spent_on_bullets -= 300
-    this_vars.total_mileage = this_vars.total_mileage-30-(40*random.random())
-    if this_vars.amount_spent_on_clothing < 18 + (2*random.random()):
+    this_vars.total_mileage = this_vars.total_mileage - 30 - (40 * random.random())
+    if this_vars.amount_spent_on_clothing < 18 + (2 * random.random()):
         or78_helpers.illness(this_vars)
 
 
@@ -21,7 +21,7 @@ def blue_mountain(this_vars):
         return
     else:
         this_vars.has_cleared_blue_montains = True
-        if random.random() < .7:
+        if random.random() < 0.7:
             blizzard(this_vars)
 
 
@@ -30,7 +30,7 @@ def south_pass(this_vars):
         blue_mountain(this_vars)
     else:
         this_vars.has_cleared_south_pass = True
-        if random.random() < .8:
+        if random.random() < 0.8:
             blizzard(this_vars)
         else:
             print("YOU MADE IT SAFELY THROUGH SOUTH PASS--NO SNOW")
@@ -38,10 +38,10 @@ def south_pass(this_vars):
 
 def rugged_mountain(this_vars):
     print("RUGGED MOUNTAINS")
-    if random.random() > .1:
-        if random.random() > .11:
+    if random.random() > 0.1:
+        if random.random() > 0.11:
             print("THE GOING GETS SLOW")
-            this_vars.total_mileage -= 45 - (random.random / .2)
+            this_vars.total_mileage -= 45 - (random.random / 0.2)
             south_pass(this_vars)
         else:
             print("WAGON DAMAGED!—LOSE TIME AND SUPPLIES")
@@ -59,7 +59,9 @@ def mountain(this_vars):
     if this_vars.total_mileage < this_vars.SOUTH_PASS_IN_MILES:
         return
 
-    if random.random()*10 > 9-((this_vars.total_mileage/100-15) ^ 2+72)/((this_vars.total_mileage/100-15) ** 2+12):
+    if random.random() * 10 > 9 - ((this_vars.total_mileage / 100 - 15) ^ 2 + 72) / (
+        (this_vars.total_mileage / 100 - 15) ** 2 + 12
+    ):
         south_pass(this_vars)
     else:
         rugged_mountain(this_vars)

@@ -48,12 +48,11 @@ class GameGlobals:
 
     def print_inventory(self):
         self.amount_spent_on_food = max(int(self.amount_spent_on_food), 0)
-        self.amount_spent_on_bullets = max(
-            int(self.amount_spent_on_bullets), 0)
-        self.amount_spent_on_clothing = max(
-            int(self.amount_spent_on_clothing), 0)
+        self.amount_spent_on_bullets = max(int(self.amount_spent_on_bullets), 0)
+        self.amount_spent_on_clothing = max(int(self.amount_spent_on_clothing), 0)
         self.amount_spent_on_miscellaneous = max(
-            int(self.amount_spent_on_miscellaneous), 0)
+            int(self.amount_spent_on_miscellaneous), 0
+        )
         print("=================================================")
         print("FOOD: ", self.amount_spent_on_food)
         print("BULLETS: ", self.amount_spent_on_bullets)
