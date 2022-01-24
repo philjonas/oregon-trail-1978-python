@@ -1,5 +1,3 @@
-import signal
-import sys
 from or78_vars import GameGlobals
 from or78_1_intro import init
 from or78_2_date import print_date, dates
@@ -27,9 +25,7 @@ from or78_7_endings import death, final_turn
     2520 BROADWAY DRIVE
     ST. PAUL, MN  55113
 """
-def signal_handler(sig, frame):
-    print('You pressed Ctrl+C!')
-    sys.exit(0)
+
 
 def game():
     g_vars = GameGlobals()
@@ -37,7 +33,6 @@ def game():
     init(g_vars)
 
     while g_vars.total_mileage < g_vars.GOAL_IN_MILES:
-        signal.signal(signal.SIGINT, signal_handler)
         print_date(g_vars.current_date)
 
         begin(g_vars)
