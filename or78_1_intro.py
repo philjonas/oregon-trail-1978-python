@@ -2,7 +2,7 @@ import or78_helpers
 
 
 def need_intro():
-    message = '''THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM
+    message = """THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM
     INDEPENDENCE, MISSOURI TO OREGON CITY, OREGON IN 1847.
     YOUR FAMILY OF FIVE WILL COVER THE 2040 MILE OREGON TRAIL
     IN 5-6 MONTHS --- IF YOU MAKE IT ALIVE.
@@ -44,7 +44,7 @@ def need_intro():
     EXCEPT BULLETS
     WHEN ASKED TO ENTER MONEY AMOUNTS, DON'T USE A "$" "."
     GOOD LUCK!!!
-    '''
+    """
 
     reply = or78_helpers.input_yes_no("DO YOU NEED INSTRUCTIONS  (y/n)")
     if reply:
@@ -52,11 +52,11 @@ def need_intro():
 
 
 def marksman_level():
-    message = '''HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE?
+    message = """HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE?
         (1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'
         (4) NEED MORE PRACTICE,  (5) SHAKY KNEES
     ENTER ONE OF THE ABOVE -- THE BETTER YOU CLAIM YOU ARE, THE
-    FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.'''
+    FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL."""
     amount = or78_helpers.input_int(message)
     return min(amount, 5)
 
@@ -94,12 +94,21 @@ def init(this_vars):
         this_vars.amount_spent_on_bullets = general_expenses("AMMUNITION")
         this_vars.amount_spent_on_clothing = general_expenses("CLOTHING")
         this_vars.amount_spent_on_miscellaneous = general_expenses(
-            "MISCELLANEOUS SUPPLIES")
-        this_vars.cash_total = 700 - this_vars.amount_spent_on_animals - this_vars.amount_spent_on_food - \
-            this_vars.amount_spent_on_bullets - this_vars.amount_spent_on_clothing - \
-            this_vars.amount_spent_on_miscellaneous
+            "MISCELLANEOUS SUPPLIES"
+        )
+        this_vars.cash_total = (
+            700
+            - this_vars.amount_spent_on_animals
+            - this_vars.amount_spent_on_food
+            - this_vars.amount_spent_on_bullets
+            - this_vars.amount_spent_on_clothing
+            - this_vars.amount_spent_on_miscellaneous
+        )
         if this_vars.cash_total < 0:
             print("YOU OVERSPENT--YOU ONLY HAD $700 TO SPEND.  BUY AGAIN.")
 
-    print("AFTER ALL YOUR PURCHASES, YOU NOW HAVE {} DOLLARS LEFT".format(
-        this_vars.cash_total))
+    print(
+        "AFTER ALL YOUR PURCHASES, YOU NOW HAVE {} DOLLARS LEFT".format(
+            this_vars.cash_total
+        )
+    )

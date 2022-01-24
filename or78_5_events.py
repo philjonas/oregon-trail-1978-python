@@ -3,11 +3,13 @@ import or78_helpers
 
 
 def cold_weather(this_vars):
-    enough_clothes = this_vars.amount_spent_on_clothing > 22 + \
-        (4 * random.random())
+    enough_clothes = this_vars.amount_spent_on_clothing > 22 + (4 * random.random())
     c_message = "" if enough_clothes else "DON'T "
-    message = "COLD WEATHER---BRRRRRRR!---YOU {}HAVE ENOUGH CLOTHING TO KEEP YOU WARM".format(
-        c_message)
+    message = (
+        "COLD WEATHER---BRRRRRRR!---YOU {}HAVE ENOUGH CLOTHING TO KEEP YOU WARM".format(
+            c_message
+        )
+    )
     print(message)
     if not enough_clothes:
         this_vars.is_sufficient_clothing = True
@@ -74,20 +76,20 @@ def lost_son(this_vars):
 
 def unsafe_water(this_vars):
     print("UNSAFE WATER--LOSE TIME LOOKING FOR CLEAN SPRING")
-    this_vars.total_mileage -= (10*random.random()) - 2
+    this_vars.total_mileage -= (10 * random.random()) - 2
 
 
 def wagon_fire(this_vars):
     print("THERE WAS A FIRE IN YOUR WAGON--FOOD AND SUPPLIES DAMAGE!")
     this_vars.amount_spent_on_food -= 40
     this_vars.amount_spent_on_bullets -= 400
-    this_vars.amount_spent_on_miscellaneous -= (8*random.random()) - 3
+    this_vars.amount_spent_on_miscellaneous -= (8 * random.random()) - 3
     this_vars.total_mileage -= 15
 
 
 def heavy_fog(this_vars):
     print("LOSE YOUR WAY IN HEAVY FOG---TIME IS LOST")
-    this_vars.total_mileage -= 10 - (5*random.random())
+    this_vars.total_mileage -= 10 - (5 * random.random())
 
 
 def snake_poison(this_vars):
@@ -103,14 +105,14 @@ def wagon_swamped(this_vars):
     print("WAGON GETS SWAMPED FORDING RIVER--LOSE FOOD AND CLOTHES")
     this_vars.amount_spent_on_food -= 30
     this_vars.amount_spent_on_clothing -= 20
-    this_vars.total_mileage -= 20 - (20*random.random())
+    this_vars.total_mileage -= 20 - (20 * random.random())
 
 
 def hail_storm(this_vars):
     print("HAIL STORM---SUPPLIES DAMAGED")
-    this_vars.total_mileage -= 5 - (10*random.random())
+    this_vars.total_mileage -= 5 - (10 * random.random())
     this_vars.amount_spent_on_bullets -= 200
-    this_vars.amount_spent_on_miscellaneous -= 4 - (3*random.random())
+    this_vars.amount_spent_on_miscellaneous -= 4 - (3 * random.random())
 
 
 def eating(this_vars):
@@ -118,10 +120,10 @@ def eating(this_vars):
     if this_vars.choice_of_eating == 1:
         or78_helpers.illness(this_vars)
     elif this_vars.choice_of_eating == 3:
-        if RND < .5:
+        if RND < 0.5:
             or78_helpers.illness(this_vars)
     else:
-        if RND < .25:
+        if RND < 0.25:
             or78_helpers.illness(this_vars)
 
 
@@ -139,15 +141,15 @@ def animals_attack(this_vars):
         print("NICE SHOOTIN' PARDNER---THEY DIDN'T GET MUCH")
     else:
         print("SLOW ON THE DRAW---THEY GOT AT YOUR FOOD AND CLOTHES")
-        this_vars.amount_spent_on_bullets -= (20 * response_time)
-        this_vars.amount_spent_on_clothing -= (4 * response_time)
-        this_vars.amount_spent_on_food -= (8 * response_time)
+        this_vars.amount_spent_on_bullets -= 20 * response_time
+        this_vars.amount_spent_on_clothing -= 4 * response_time
+        this_vars.amount_spent_on_food -= 8 * response_time
 
 
 def bandits_attack(this_vars):
     print("BANDITS ATTACK")
     response_time = or78_helpers.shooting(this_vars.shooting_level)
-    this_vars.amount_spent_on_bullets -= (20 * response_time)
+    this_vars.amount_spent_on_bullets -= 20 * response_time
 
     if this_vars.amount_spent_on_bullets < 0:
         print("YOU RAN OUT OF BULLETS---THEY GET LOTS OF CASH")
@@ -163,10 +165,24 @@ def bandits_attack(this_vars):
 
 ##### events array #####
 
-events_list = [weather, wagon_break_down, ox_injuries, arm_broke,
-               ox_wander, helpful_indians, lost_son, unsafe_water,
-               wagon_fire, heavy_fog, snake_poison, wagon_swamped,
-               hail_storm, eating, animals_attack, bandits_attack]
+events_list = [
+    weather,
+    wagon_break_down,
+    ox_injuries,
+    arm_broke,
+    ox_wander,
+    helpful_indians,
+    lost_son,
+    unsafe_water,
+    wagon_fire,
+    heavy_fog,
+    snake_poison,
+    wagon_swamped,
+    hail_storm,
+    eating,
+    animals_attack,
+    bandits_attack,
+]
 
 
 def events(this_vars):

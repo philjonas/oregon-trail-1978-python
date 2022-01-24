@@ -31,25 +31,31 @@ def spend(value, purse):
 def fort(this_vars):
     print("ENTER WHAT YOU WISH TO SPEND ON THE FOLLOWING: ")
     this_vars.cash_total, P, is_purchase = spend(
-        or78_helpers.input_int('FOOD'), this_vars.cash_total)
+        or78_helpers.input_int("FOOD"), this_vars.cash_total
+    )
     if is_purchase and P > 0:
-        this_vars.amount_spent_on_food += (
-            this_vars.amount_spent_on_food+2)/(3*P)
+        this_vars.amount_spent_on_food += (this_vars.amount_spent_on_food + 2) / (3 * P)
     this_vars.cash_total, P, is_purchase = spend(
-        or78_helpers.input_int('AMMUNITION'), this_vars.cash_total)
+        or78_helpers.input_int("AMMUNITION"), this_vars.cash_total
+    )
     if is_purchase and P > 0:
         this_vars.amount_spent_on_bullets += int(
-            (this_vars.amount_spent_on_bullets+2)/(3*P*50))
+            (this_vars.amount_spent_on_bullets + 2) / (3 * P * 50)
+        )
     this_vars.cash_total, P, is_purchase = spend(
-        or78_helpers.input_int('CLOTHING'), this_vars.cash_total)
+        or78_helpers.input_int("CLOTHING"), this_vars.cash_total
+    )
     if is_purchase and P > 0:
         this_vars.amount_spent_on_clothing += (
-            this_vars.amount_spent_on_clothing+2)/(3*P)
+            this_vars.amount_spent_on_clothing + 2
+        ) / (3 * P)
     this_vars.cash_total, P, is_purchase = spend(
-        or78_helpers.input_int('MISCELLANEOUS SUPPLIES'), this_vars.cash_total)
+        or78_helpers.input_int("MISCELLANEOUS SUPPLIES"), this_vars.cash_total
+    )
     if is_purchase and P > 0:
         this_vars.amount_spent_on_miscellaneous += (
-            this_vars.amount_spent_on_miscellaneous+2)/(3*P)
+            this_vars.amount_spent_on_miscellaneous + 2
+        ) / (3 * P)
     this_vars.total_mileage -= 45
     continue_on(this_vars)
 
@@ -65,18 +71,22 @@ def hunt(this_vars):
         if response_time <= 1:
             print("RIGHT BETWEEN THE EYES---YOU OOT A BIG ONE!!!!")
             print("FULL BELLIES TONIGHT!")
-            this_vars.amount_spent_on_food = (
-                this_vars.amount_spent_on_food+52)+(RND*6)
+            this_vars.amount_spent_on_food = (this_vars.amount_spent_on_food + 52) + (
+                RND * 6
+            )
             this_vars.amount_spent_on_bullets = (
-                this_vars.amount_spent_on_bullets-10)-(RND*4)
-        elif 100*RND < 13*response_time:
+                this_vars.amount_spent_on_bullets - 10
+            ) - (RND * 4)
+        elif 100 * RND < 13 * response_time:
             print("YOU MISSED---AND YOUR DINNER GOT AWAY.....")
         else:
             print("NICE SHOT--RIGHT ON TARGET--GOOD EATIN' TONIGHT!!")
-            this_vars.amount_spent_on_food = (
-                this_vars.amount_spent_on_food+48)-(2*response_time)
+            this_vars.amount_spent_on_food = (this_vars.amount_spent_on_food + 48) - (
+                2 * response_time
+            )
             this_vars.amount_spent_on_bullets = (
-                this_vars.amount_spent_on_bullets-10)-(3*response_time)
+                this_vars.amount_spent_on_bullets - 10
+            ) - (3 * response_time)
         continue_on(this_vars)
 
 
@@ -91,14 +101,16 @@ def choices(this_vars):
     if this_vars.has_fort:
         while choice < 1 or choice > 3:
             choice = or78_helpers.input_int(
-                "DO YOU WANT TO (1) STOP AT THE NEXT FORT, (2) HUNT, OR (3) CONTINUE? ")
+                "DO YOU WANT TO (1) STOP AT THE NEXT FORT, (2) HUNT, OR (3) CONTINUE? "
+            )
         choices_1 = [fort, hunt, continue_on]
     else:
         while choice < 1 or choice > 2:
             choice = or78_helpers.input_int(
-                "DO YOU WANT TO (1) HUNT, OR (2) CONTINUE? ")
+                "DO YOU WANT TO (1) HUNT, OR (2) CONTINUE? "
+            )
         choices_1 = [hunt, continue_on]
-    choices_1[choice-1](this_vars)
+    choices_1[choice - 1](this_vars)
 
 
 def toggle_fort_presence(this_vars):
@@ -109,12 +121,14 @@ def eating(this_vars):
     this_vars.choice_of_eating = 0
     while this_vars.choice_of_eating < 1 or this_vars.choice_of_eating > 3:
         this_vars.choice_of_eating = or78_helpers.input_int(
-            "DO YOU WANT TO EAT (1) POORLY, (2) MODERATELY OR (3) WELL")
-    eaten = (this_vars.amount_spent_on_food-8)-(5*this_vars.choice_of_eating)
+            "DO YOU WANT TO EAT (1) POORLY, (2) MODERATELY OR (3) WELL"
+        )
+    eaten = (this_vars.amount_spent_on_food - 8) - (5 * this_vars.choice_of_eating)
     if eaten < 0:
         print("YOU CAN'T EAT THAT WELL")
     else:
         this_vars.amount_spent_on_food = eaten
-        this_vars.total_mileage += (this_vars.total_mileage+200+(
-            this_vars.amount_spent_on_animals-220)) / (5+(10*random.random()))
+        this_vars.total_mileage += (
+            this_vars.total_mileage + 200 + (this_vars.amount_spent_on_animals - 220)
+        ) / (5 + (10 * random.random()))
         this_vars.is_blizzard = this_vars.is_sufficient_clothing = False

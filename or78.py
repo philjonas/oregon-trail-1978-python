@@ -7,7 +7,7 @@ import or78_5_events
 import or78_6_mountain
 import or78_7_endings
 
-'''
+"""
  The program that follows is a reconstruction
  of the Oregon Trail game written for HP time-shared
  BASIC by Don Rawitsch and Bill Heinemann and Paul Dillenberger
@@ -24,7 +24,7 @@ import or78_7_endings
     MECC SUPPORT SERVICES
     2520 BROADWAY DRIVE
     ST. PAUL, MN  55113
-'''
+"""
 
 
 def game():
@@ -73,7 +73,7 @@ def game():
     if not g_vars.dead:
         or78_7_endings.final_turn(g_vars)
 
-    print('END')
+    print("END")
 
 
 if __name__ == "__main__":
