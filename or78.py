@@ -1,11 +1,13 @@
+import signal
+import sys
 from or78_vars import GameGlobals
-import or78_1_intro
-import or78_2_date
-import or78_3_loop
-import or78_4_riders
-import or78_5_events
-import or78_6_mountain
-import or78_7_endings
+from or78_1_intro import init
+from or78_2_date import print_date, dates
+from or78_3_loop import begin, choices, toggle_fort_presence, eating
+from or78_4_riders import riders
+from or78_5_events import events
+from or78_6_mountain import mountain
+from or78_7_endings import death, final_turn
 
 """
  The program that follows is a reconstruction
@@ -25,53 +27,56 @@ import or78_7_endings
     2520 BROADWAY DRIVE
     ST. PAUL, MN  55113
 """
-
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
 
 def game():
     g_vars = GameGlobals()
 
-    or78_1_intro.init(g_vars)
+    init(g_vars)
 
     while g_vars.total_mileage < g_vars.GOAL_IN_MILES:
-        or78_2_date.print_date(g_vars.current_date)
+        signal.signal(signal.SIGINT, signal_handler)
+        print_date(g_vars.current_date)
 
-        or78_3_loop.begin(g_vars)
+        begin(g_vars)
         if g_vars.dead:
-            or78_7_endings.death(g_vars)
+            death(g_vars)
             break
 
-        or78_3_loop.choices(g_vars)
+        choices(g_vars)
         if g_vars.dead:
-            or78_7_endings.death(g_vars)
+            death(g_vars)
             break
         else:
-            or78_3_loop.toggle_fort_presence(g_vars)
+            toggle_fort_presence(g_vars)
 
-        or78_3_loop.eating(g_vars)
+        eating(g_vars)
 
-        or78_4_riders.riders(g_vars)
+        riders(g_vars)
         if g_vars.dead:
-            or78_7_endings.death(g_vars)
+            death(g_vars)
             break
 
-        or78_5_events.events(g_vars)
+        events(g_vars)
         if g_vars.dead:
-            or78_7_endings.death(g_vars)
+            death(g_vars)
             break
 
-        or78_6_mountain.mountain(g_vars)
+        mountain(g_vars)
         if g_vars.dead:
-            or78_7_endings.death(g_vars)
+            death(g_vars)
             break
 
         g_vars.increment_turn()
 
-        if g_vars.no_turns_left(or78_2_date.dates):
+        if g_vars.no_turns_left(dates):
             g_vars.print_too_long()
             break
 
     if not g_vars.dead:
-        or78_7_endings.final_turn(g_vars)
+        final_turn(g_vars)
 
     print("END")
 
