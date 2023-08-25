@@ -69,7 +69,7 @@ def hunt(this_vars):
         RND = random.random()
         response_time = or78_helpers.shooting(this_vars.shooting_level)
         if response_time <= 1:
-            print("RIGHT BETWEEN THE EYES---YOU OOT A BIG ONE!!!!")
+            print("RIGHT BETWEEN THE EYES---YOU GOT A BIG ONE!!!!")
             print("FULL BELLIES TONIGHT!")
             this_vars.amount_spent_on_food = (this_vars.amount_spent_on_food + 52) + (
                 RND * 6
